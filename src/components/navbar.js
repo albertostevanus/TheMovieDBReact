@@ -8,9 +8,7 @@ const Navbar = () => {
         src="/movie-db-logo.svg"
         style={{ width: 50, marginRight: 10 }}
       />
-      <a className="navbar-brand" href="#">
-        TheMovieDB API
-      </a>
+      <a className="navbar-brand">TheMovieDB API</a>
       <button
         className="navbar-toggler"
         type="button"

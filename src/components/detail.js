@@ -1,9 +1,35 @@
 import React, { Component } from "react";
 import Navbar from "../components/navbar";
+import Cast from "../components/cast";
 
 class Detail extends Component {
-  state = {};
+  state = {
+    newMovieDetail: {
+      genres: [],
+      credits: {
+        cast: [],
+        crew: []
+      }
+    }
+  };
+
+  componentDidMount = () => {
+    this.getDetail();
+  };
+
+  getDetail = () => {
+    const newDetailURL = `https://api.themoviedb.org/3/movie/${
+      this.props.location.state.newDetailId
+    }?api_key=9ada7f6659a104d4bd6d9141d3d2cce3&language=en-US&append_to_response=credits`;
+    fetch(newDetailURL).then(resp => {
+      resp.json().then(res => {
+        this.setState({ newMovieDetail: res });
+      });
+    });
+  };
+
   render() {
+    const newMovieDetail = this.state.newMovieDetail;
     return (
       <div>
         <Navbar />
@@ -17,79 +43,30 @@ class Detail extends Component {
               />
             </div>
             <div className="col-md-8">
-              <h3>The Meg</h3>
+              <h3>{newMovieDetail.title}</h3>
               <br />
-              <p>Release date: </p>
-              <p>Rating: </p>
-              <p>Vote Count: </p>
-              <p>Genres: </p>
-              <p>Overview: </p>
+              <span>Release date: </span>
+              {newMovieDetail.release_date}
+              <br />
+              <span>Rating: </span>
+              {newMovieDetail.vote_average}
+              <br />
+              <span>Genres: </span>
+              {newMovieDetail.genres.map((element, index) => {
+                if (index < newMovieDetail.genres.length - 1) {
+                  return newMovieDetail.genres[index].name + ", ";
+                } else {
+                  return newMovieDetail.genres[index].name;
+                }
+              })}
+              <br />
+              <span>Overview: </span>
+              <br />
+              {newMovieDetail.overview}
             </div>
           </div>
           <br />
-          <div className="row">
-            <div className="col-md-12">
-              <h5>Casts</h5>
-            </div>
-          </div>
-          <div className="row justify-content-center">
-            <div className="col-md-2">
-              <img
-                alt="Cast_photo"
-                src="https://image.tmdb.org/t/p/w300/PhWiWgasncGWD9LdbsGcmxkV4r.jpg"
-              />
-            </div>
-            <div className="col-md-2">
-              <img
-                alt="Cast_photo"
-                src="https://image.tmdb.org/t/p/w300/PhWiWgasncGWD9LdbsGcmxkV4r.jpg"
-              />
-            </div>
-            <div className="col-md-2">
-              <img
-                alt="Cast_photo"
-                src="https://image.tmdb.org/t/p/w300/PhWiWgasncGWD9LdbsGcmxkV4r.jpg"
-              />
-            </div>
-            <div className="col-md-2">
-              <img
-                alt="Cast_photo"
-                src="https://image.tmdb.org/t/p/w300/PhWiWgasncGWD9LdbsGcmxkV4r.jpg"
-              />
-            </div>
-            <div className="col-md-2">
-              <img
-                alt="Cast_photo"
-                src="https://image.tmdb.org/t/p/w300/PhWiWgasncGWD9LdbsGcmxkV4r.jpg"
-              />
-            </div>
-            <div className="col-md-2">
-              <img
-                alt="Cast_photo"
-                src="https://image.tmdb.org/t/p/w300/PhWiWgasncGWD9LdbsGcmxkV4r.jpg"
-              />
-            </div>
-          </div>
-          <div className="row justify-content-center">
-            <div className="col-md-2">
-              <p style={{}}>Jason Statham</p>
-            </div>
-            <div className="col-md-2">
-              <p>Jason Statham</p>
-            </div>
-            <div className="col-md-2">
-              <p>Jason Statham</p>
-            </div>
-            <div className="col-md-2">
-              <p>Jason Statham</p>
-            </div>
-            <div className="col-md-2">
-              <p>Jason Statham</p>
-            </div>
-            <div className="col-md-2">
-              <p>Jason Statham</p>
-            </div>
-          </div>
+          <Cast cast={newMovieDetail.credits.cast} />
         </main>
       </div>
     );
