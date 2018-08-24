@@ -28,7 +28,15 @@ const NewReleases = props => {
           </div>
         </div>
         <div className="home-content">
-          <a className="title-link">{newMovie.title}</a>
+          <Link
+            to={{
+              pathname: `/detail/${newMovie.id}`,
+              state: { movieId: newMovie.id }
+            }}
+            className="title-link"
+          >
+            {newMovie.title}
+          </Link>
           <div className="movie-year">
             {newMovie.release_date.substring(0, 4)}
           </div>

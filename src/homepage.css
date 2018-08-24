@@ -1,3 +1,7 @@
+.input-group.md-form.form-sm.form-2 input.red-border {
+  border: 1px solid #ef9a9a;
+}
+
 .movie__poster {
   width: 100%;
   height: 350px;

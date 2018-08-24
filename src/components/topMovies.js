@@ -27,7 +27,15 @@ const TopMovies = props => {
           </div>
         </div>
         <div className="home-content">
-          <a className="title-link">{topMovie.title}</a>
+          <Link
+            to={{
+              pathname: `/detail/${topMovie.id}`,
+              state: { movieId: topMovie.id }
+            }}
+            className="title-link"
+          >
+            {topMovie.title}
+          </Link>
           <div className="movie-year">
             {topMovie.release_date.substring(0, 4)}
           </div>
