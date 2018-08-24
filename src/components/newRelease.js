@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "../homepage.css";
 
 const NewReleases = props => {
   return props.newMovies.map(newMovie => {
@@ -10,11 +11,12 @@ const NewReleases = props => {
             <Link
               to={{
                 pathname: `/detail/${newMovie.id}`,
-                state: { newDetailId: newMovie.id }
+                state: { movieId: newMovie.id }
               }}
             >
               <div className="content-overlay" />
               <img
+                className="movie__poster"
                 alt={newMovie.title}
                 src={`https://image.tmdb.org/t/p/w780${newMovie.poster_path}`}
               />

@@ -8,7 +8,9 @@ const Navbar = () => {
         src="/movie-db-logo.svg"
         style={{ width: 50, marginRight: 10 }}
       />
-      <a className="navbar-brand">TheMovieDB API</a>
+      <a className="navbar-brand" href="/">
+        TheMovieDB API
+      </a>
       <button
         className="navbar-toggler"
         type="button"
@@ -21,13 +23,13 @@ const Navbar = () => {
         <span className="navbar-toggler-icon" />
       </button>
       <div className="collapse navbar-collapse" id="navbarCollapse">
-        <ul className="navbar-nav mr-auto">
+        {/* <ul className="navbar-nav mr-auto">
           <li className="nav-item active">
             <a className="nav-link" href="/">
               Home
             </a>
           </li>
-        </ul>
+        </ul> */}
       </div>
     </nav>
   );

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "../components/cast.css";
 
 class Cast extends Component {
   state = {};
