@@ -1,5 +1,6 @@
-.input-group.md-form.form-sm.form-2 input.red-border {
-  border: 1px solid #ef9a9a;
+.input-group.md-form.form-sm.form-2 input.amber-border {
+  border: 1px solid rgb(4, 199, 106);
+  margin-top: 20px;
 }
 
 .movie__poster {

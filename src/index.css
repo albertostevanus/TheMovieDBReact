@@ -1,8 +1,27 @@
-* {
-  font-family: "Roboto", sans-serif;
+@font-face {
+  font-family: "GothamHTF";
+  src: url("fonts/GothamHTF-Book.woff");
+}
+
+@font-face {
+  font-family: "Open Sans Light";
+  src: url("fonts/OpenSans-Light.ttf");
+}
+
+p {
+  font-family: "Open Sans Light";
 }
 
 body {
   margin: 0;
   padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-weight: bold !important ;
+  font-family: "GothamHTF";
 }

@@ -20,7 +20,11 @@ const SearchResult = props => {
                 <img
                   className="movie__poster"
                   alt={result.title}
-                  src={`https://image.tmdb.org/t/p/w780${result.poster_path}`}
+                  src={
+                    result.poster_path === null
+                      ? "/placeholder.png"
+                      : `https://image.tmdb.org/t/p/w780${result.poster_path}`
+                  }
                 />
                 <div className="content-details">
                   <h3 className="content-title">{result.title}</h3>

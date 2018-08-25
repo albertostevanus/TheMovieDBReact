@@ -11,7 +11,7 @@ class Cast extends Component {
             <h5>Casts</h5>
           </div>
         </div>
-        <div className="row justify-content-center">
+        <div className="row">
           {this.props.cast.slice(0, 6).map((element, index) => {
             return (
               <div className="col-md-2" key={index}>

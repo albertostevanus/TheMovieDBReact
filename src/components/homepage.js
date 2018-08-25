@@ -41,7 +41,7 @@ class Homepage extends Component {
 
   searchChangeHandler = e => {
     const searchTerm = e.target.value;
-    if (searchTerm != "") {
+    if (searchTerm !== "") {
       this.performSearch(searchTerm);
     }
     this.setState({ rowsSearch: [] });
@@ -67,7 +67,7 @@ class Homepage extends Component {
         <main role="main" className="container">
           <div className="input-group md-form form-sm form-2 pl-0">
             <input
-              className="form-control my-0 py-1 amber-border"
+              className="form-control py-1 amber-border"
               type="text"
               placeholder="Search"
               aria-label="Search"
@@ -75,7 +75,7 @@ class Homepage extends Component {
             />
           </div>
           <br />
-          {this.state.rowsSearch.length != 0 ? (
+          {this.state.rowsSearch.length !== 0 ? (
             <React.Fragment>
               <div className="col-md-6">
                 <h3>Search Result</h3>

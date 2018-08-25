@@ -17,7 +17,11 @@ const TopMovies = props => {
               <img
                 className="movie__poster"
                 alt={topMovie.title}
-                src={`https://image.tmdb.org/t/p/w780${topMovie.poster_path}`}
+                src={
+                  topMovie.poster_path === null
+                    ? "/placeholder.png"
+                    : `https://image.tmdb.org/t/p/w780${topMovie.poster_path}`
+                }
               />
               <div className="content-details">
                 <h3 className="content-title">{topMovie.title}</h3>
