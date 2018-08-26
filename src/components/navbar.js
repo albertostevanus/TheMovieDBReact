@@ -6,10 +6,14 @@ const Navbar = () => {
       <img
         alt="Logo"
         src="/movie-db-logo.svg"
-        style={{ width: 50, marginRight: 10 }}
+        style={{ width: 50, marginRight: 25 }}
       />
-      <a className="navbar-brand" href="/">
-        TheMovieDB API
+      <a
+        className="navbar-brand"
+        href="/"
+        style={{ fontWeight: "bold", fontSize: 25 }}
+      >
+        C N M A
       </a>
       <button
         className="navbar-toggler"

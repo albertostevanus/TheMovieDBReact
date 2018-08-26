@@ -7,11 +7,6 @@ class Cast extends Component {
     return (
       <React.Fragment>
         <div className="row">
-          <div className="col-md-12">
-            <h5>Casts</h5>
-          </div>
-        </div>
-        <div className="row">
           {this.props.cast.slice(0, 6).map((element, index) => {
             return (
               <div className="col-md-2" key={index}>
