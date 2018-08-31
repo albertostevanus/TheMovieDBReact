@@ -3,7 +3,8 @@ import Navbar from "../components/navbar";
 import "../homepage.css";
 import NewReleases from "../components/newRelease";
 import TopMovies from "../components/topMovies";
-import SearchResult from "../components/searchResult";
+import MovieSearchResult from "./movieSearchResult";
+import PersonSearchResult from "./personSearchResult";
 
 class Homepage extends Component {
   state = {
@@ -49,7 +50,7 @@ class Homepage extends Component {
 
   performSearch = searchTerm => {
     const movieUrl =
-      `https://api.themoviedb.org/3/search/movie?api_key=9ada7f6659a104d4bd6d9141d3d2cce3&language=en-US&page=1&query=` +
+      `https://api.themoviedb.org/3/search/multi?api_key=9ada7f6659a104d4bd6d9141d3d2cce3&language=en-US&page=1&include_adult=false&query=` +
       searchTerm;
     fetch(movieUrl).then(movieResp => {
       movieResp.json().then(movieRes => {
@@ -59,8 +60,18 @@ class Homepage extends Component {
     });
   };
 
+  arrayContains = (ob, arr) => {
+    var found = false;
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i].media_type === ob) {
+        found = true;
+        break;
+      }
+    }
+    return found;
+  };
+
   render() {
-    console.log(this.state.rowsSearch);
     return (
       <div>
         <Navbar />
@@ -77,12 +88,31 @@ class Homepage extends Component {
           <br />
           {this.state.rowsSearch.length !== 0 ? (
             <React.Fragment>
-              <div className="col-md-6">
-                <h3>Search Result</h3>
-                <hr />
-              </div>
               <div className="row">
-                <SearchResult movieResults={this.state.rowsSearch} />
+                {this.arrayContains("movie", this.state.rowsSearch) && (
+                  <React.Fragment>
+                    <div className="row">
+                      <h3>Movie</h3>
+                      <hr />
+                    </div>
+                    <div className="row">
+                      <MovieSearchResult movieResults={this.state.rowsSearch} />
+                    </div>
+                  </React.Fragment>
+                )}
+                {this.arrayContains("person", this.state.rowsSearch) && (
+                  <React.Fragment>
+                    <div className="row">
+                      <h3>Actor / Actresses</h3>
+                      <hr />
+                    </div>
+                    <div className="row">
+                      <PersonSearchResult
+                        personResults={this.state.rowsSearch}
+                      />
+                    </div>
+                  </React.Fragment>
+                )}
               </div>
             </React.Fragment>
           ) : (

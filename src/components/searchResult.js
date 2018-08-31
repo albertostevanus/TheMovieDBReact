@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import "../homepage.css";
 
 const SearchResult = props => {
-  console.log(props);
   if (props !== 0) {
     return props.movieResults.map(result => {
       return (
@@ -44,7 +43,7 @@ const SearchResult = props => {
               {result.title}
             </Link>
             <div className="movie-year">
-              {result.release_date.substring(0, 4)}
+              {/* {result.release_date.substring(0, 4)} */}
             </div>
           </div>
         </div>

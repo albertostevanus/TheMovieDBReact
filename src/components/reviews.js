@@ -2,7 +2,6 @@ import React, { Component } from "react";
 
 class Reviews extends Component {
   state = {};
-  consol;
   render() {
     if (this.props.reviews.length !== 0) {
       return (
