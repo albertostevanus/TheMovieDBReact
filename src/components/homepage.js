@@ -10,7 +10,8 @@ class Homepage extends Component {
   state = {
     rows: [],
     rowsTop: [],
-    rowsSearch: []
+    rowsSearchMovie: [],
+    rowsSearchPerson: []
   };
 
   componentDidMount() {
@@ -45,7 +46,7 @@ class Homepage extends Component {
     if (searchTerm !== "") {
       this.performSearch(searchTerm);
     }
-    this.setState({ rowsSearch: [] });
+    this.setState({ rowsSearchMovie: [], rowsSearchPerson: [] });
   };
 
   performSearch = searchTerm => {
@@ -55,7 +56,20 @@ class Homepage extends Component {
     fetch(movieUrl).then(movieResp => {
       movieResp.json().then(movieRes => {
         const movieResults = movieRes.results;
-        this.setState({ rowsSearch: movieResults });
+        if (this.arrayContains("movie", movieResults)) {
+          this.setState({
+            rowsSearchMovie: movieResults.filter(
+              item => item.media_type === "movie"
+            )
+          });
+        }
+        if (this.arrayContains("person", movieResults)) {
+          this.setState({
+            rowsSearchPerson: movieResults.filter(
+              item => item.media_type === "person"
+            )
+          });
+        }
       });
     });
   };
@@ -86,54 +100,50 @@ class Homepage extends Component {
             />
           </div>
           <br />
-          {this.state.rowsSearch.length !== 0 ? (
+          {this.state.rowsSearchMovie.length !== 0 && (
             <React.Fragment>
               <div className="row">
-                {this.arrayContains("movie", this.state.rowsSearch) && (
-                  <React.Fragment>
-                    <div className="row">
-                      <h3>Movie</h3>
-                      <hr />
-                    </div>
-                    <div className="row">
-                      <MovieSearchResult movieResults={this.state.rowsSearch} />
-                    </div>
-                  </React.Fragment>
-                )}
-                {this.arrayContains("person", this.state.rowsSearch) && (
-                  <React.Fragment>
-                    <div className="row">
-                      <h3>Actor / Actresses</h3>
-                      <hr />
-                    </div>
-                    <div className="row">
-                      <PersonSearchResult
-                        personResults={this.state.rowsSearch}
-                      />
-                    </div>
-                  </React.Fragment>
-                )}
-              </div>
-            </React.Fragment>
-          ) : (
-            <React.Fragment>
-              <div className="col-md-6">
-                <h3>Popular Movies</h3>
+                <h3>Movie</h3>
                 <hr />
               </div>
               <div className="row">
-                <TopMovies topMovies={this.state.rowsTop} />
-              </div>
-              <br />
-              <div className="col-md-6">
-                <h3>Now Playing</h3>
-                <hr />
-              </div>
-              <div className="row">
-                <NewReleases newMovies={this.state.rows} />
+                <MovieSearchResult movieResults={this.state.rowsSearchMovie} />
               </div>
             </React.Fragment>
           )}
+          {this.state.rowsSearchPerson.length !== 0 && (
+            <React.Fragment>
+              <div className="row">
+                <h3>Actor / Actresses</h3>
+                <hr />
+              </div>
+              <div className="row">
+                <PersonSearchResult
+                  personResults={this.state.rowsSearchPerson}
+                />
+              </div>
+            </React.Fragment>
+          )}
+          {this.state.rowsSearchMovie.length === 0 &&
+            this.state.rowsSearchPerson.length === 0 && (
+              <React.Fragment>
+                <div className="col-md-6">
+                  <h3>Popular Movies</h3>
+                  <hr />
+                </div>
+                <div className="row">
+                  <TopMovies topMovies={this.state.rowsTop} />
+                </div>
+                <br />
+                <div className="col-md-6">
+                  <h3>Now Playing</h3>
+                  <hr />
+                </div>
+                <div className="row">
+                  <NewReleases newMovies={this.state.rows} />
+                </div>
+              </React.Fragment>
+            )}
         </main>
       </div>
     );
